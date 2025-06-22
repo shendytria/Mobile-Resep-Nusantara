@@ -62,28 +62,14 @@ class _LandingPageState extends State<LandingPage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo area with animation
+              // Area logo dengan animasi
               ScaleTransition(
                 scale: _animation,
-                child: Container(
+                child: Image.asset(
+                  'assets/images/resep_nusantara_logo.png',
+                  fit: BoxFit.contain,
                   height: 300,
                   width: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(120),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 0,
-                        blurRadius: 20,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Image.asset(
-                    'assets/images/resep_nusantara_logo.png',
-                    fit: BoxFit.contain,
-                  ),
                 ),
               ),
 

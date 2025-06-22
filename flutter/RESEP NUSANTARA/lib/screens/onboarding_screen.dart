@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -12,11 +11,9 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
-  Timer? _navigationTimer;
 
   @override
   void dispose() {
-    _navigationTimer?.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -25,15 +22,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     setState(() {
       _currentIndex = index;
     });
-    
-    // Jika sudah di slide ketiga (index 2), set timer untuk auto navigate
+
+    // Jika mencapai halaman ketiga (index 2), langsung navigasi ke login
     if (index == 2) {
-      _navigationTimer = Timer(const Duration(seconds: 3), () {
+      Future.delayed(Duration.zero, () {
         Navigator.pushReplacementNamed(context, '/login');
       });
-    } else {
-      // Cancel timer jika user swipe balik ke slide sebelumnya
-      _navigationTimer?.cancel();
     }
   }
 
@@ -63,10 +57,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   imagePath: 'assets/images/resep_nusantara_logo.png',
                   title: 'Lestarikan cita rasa warisan nenek moyang',
                 ),
-                OnboardingPage(
-                  imagePath: 'assets/images/resep_nusantara_logo.png',
-                  title: 'Mulai perjalanan kuliner Anda hari ini!',
-                ),
+                // Halaman ketiga kosong untuk memungkinkan swipe ketiga
+                SizedBox.shrink(),
               ],
             ),
           ),
@@ -91,26 +83,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     );
                   }),
                 ),
-                const SizedBox(height: 16),
-                // Tampilkan pesan loading di slide ketiga
-                if (_currentIndex == 2)
-                  Column(
-                    children: [
-                      const CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0D5C46)),
-                        strokeWidth: 2,
-                      ),
-                      const SizedBox(height: 12),
-                      const Text(
-                        'Menuju halaman masuk...',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFF0D5C46),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
               ],
             ),
           ),

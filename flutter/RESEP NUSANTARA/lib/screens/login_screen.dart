@@ -193,25 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 40),
                   
                   // Logo Section
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 5,
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      'assets/images/resep_nusantara_logo.png',
-                      height: 300,
-                      fit: BoxFit.contain,
-                    ),
+                  Image.asset(
+                    'assets/images/resep_nusantara_logo.png',
+                    height: 300,
+                    fit: BoxFit.contain,
                   ),
                   
                   // Welcome Text
